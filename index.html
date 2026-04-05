@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+  <title>Редактор кода с ИИ</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Верхняя панель инструментов -->
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <select id="fontFamily">
+          <option value="Arial">Arial</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Courier New">Courier New</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Verdana">Verdana</option>
+        </select>
+        <select id="fontSize">
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="24">24</option>
+        </select>
+      </div>
+      <div class="toolbar-group">
+        <button id="boldBtn" title="Жирный">B</button>
+        <button id="italicBtn" title="Курсив">I</button>
+        <button id="underlineBtn" title="Подчеркнутый">U</button>
+      </div>
+    </div>
+
+    <!-- Основная область -->
+    <div class="main-content">
+      <!-- Редактор -->
+      <div class="editor-container">
+        <textarea id="editor" placeholder="Начните вводить текст..."></textarea>
+      </div>
+
+      <!-- ИИ-панель -->
+      <div class="ai-panel">
+        <h3>ИИ-ассистент</h3>
+        <div class="ai-buttons">
+          <button id="aiImprove" class="ai-btn">
+            <span class="ai-icon">✨</span>
+            Улучшить текст
+          </button>
+          <button id="aiRewrite" class="ai-btn">
+            <span class="ai-icon">🔄</span>
+            Другими словами
+          </button>
+          <button id="aiFixErrors" class="ai-btn">
+            <span class="ai-icon">✅</span>
+            Исправить ошибки
+          </button>
+          <button id="aiTranslate" class="ai-btn">
+            <span class="ai-icon">🌐</span>
+            Перевести на английский
+          </button>
+        </div>
+        <div id="aiResult" class="ai-result"></div>
+      </div>
+    </div>
+
+    <!-- Статус бар -->
+    <div class="statusbar">
+      <span id="charCount">Символов: 0</span>
+      <span id="wordCount">Слов: 0</span>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
