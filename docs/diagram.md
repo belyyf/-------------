@@ -20,7 +20,7 @@ graph TB
     end
 
     subgraph "External"
-        OpenRouter[OpenRouter API<br/>llama-3.1-8b-instruct]
+        OpenRouter[OpenRouter API<br/>]
     end
 
     HTML --> Renderer
