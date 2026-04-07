@@ -1,7 +1,3 @@
-/**
- * Тесты для функций редактора
- */
-
 // Функция подсчёта слов
 function countWords(text) {
   return text.trim() ? text.trim().split(/\s+/).length : 0;
@@ -27,7 +23,7 @@ function applyFormatting(text, options) {
   return result;
 }
 
-// Функция перевода (симуляция)
+// Функция перевода 
 function translateToEnglish(text) {
   return `Translated: ${text}`;
 }

@@ -1,6 +1,6 @@
 # Главная
 
-Добро пожаловать в документацию проекта **Code Editor with AI Assistant**.
+**Code Editor with AI Assistant**.
 
 ## Содержание
 
