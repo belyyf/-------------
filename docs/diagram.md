@@ -1,31 +1,3 @@
-# Диаграмма последовательности — Редактор кода с ИИ-ассистентом
-
-## Полный цикл ИИ-запроса
-
-```mermaid
-sequenceDiagram
-    participant U as Пользователь
-    participant R as renderer.js
-    participant P as preload.js
-    participant M as main.js
-    participant A as OpenRouter API
-
-    U->>R: Нажимает «Улучшить текст»
-    R->>P: improveText(text)
-    P->>M: invoke('ai-improve-text')
-    M->>A: POST запрос
-    A-->>M: Ответ с текстом
-    M-->>P: return result
-    P-->>R: Promise.resolve
-    R-->>U: Показ результата
-
-    alt Ошибка
-        A-->>M: Ошибка
-        M-->>R: throw Error
-        R-->>U: Показ ошибки
-    end
-```
-
 ## Архитектура компонентов
 
 ```mermaid
