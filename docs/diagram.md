@@ -4,44 +4,25 @@
 
 ```mermaid
 sequenceDiagram
-    autonumber
     participant U as Пользователь
-    participant Renderer as renderer.js
-    participant Preload as preload.js
-    participant IPC as IPC Handler
-    participant Main as main.js
-    participant API as OpenRouter API
+    participant R as renderer.js
+    participant P as preload.js
+    participant M as main.js
+    participant A as OpenRouter API
 
-    U->>Renderer: Ввод текста в редактор
-    Renderer->>Renderer: Обновление счётчиков<br/>символов и слов
+    U->>R: Нажимает «Улучшить текст»
+    R->>P: improveText(text)
+    P->>M: invoke('ai-improve-text')
+    M->>A: POST запрос
+    A-->>M: Ответ с текстом
+    M-->>P: return result
+    P-->>R: Promise.resolve
+    R-->>U: Показ результата
 
-    U->>Renderer: Нажатие кнопки «Улучшить текст»
-    Renderer->>Renderer: Проверка: текст не пустой
-    Renderer->>Renderer: Отображение «⏳ Обработка...»
-
-    Renderer->>Preload: window.electronAPI<br/>.improveText(text)
-    Preload->>IPC: ipcRenderer.invoke<br/>('ai-improve-text', text)
-    IPC->>Main: Активация обработчика<br/>'ai-improve-text'
-
-    Main->>Main: callOpenRouter<br/>(systemPrompt, text)
-    Main->>Main: Формирование payload<br/>model: llama-3.1-8b-instruct
-
-    Main->>API: POST /v1/chat/completions<br/>Authorization: Bearer KEY
-    API-->>Main: 200 OK {choices: [{message: {content: "..."}}]}
-
-    Main->>Main: Парсинг ответа
-    Main-->>IPC: return response text
-    IPC-->>Preload: Promise.resolve(result)
-    Preload-->>Renderer: return result
-    Renderer->>Renderer: showResult(text)
-    Renderer-->>U: Отображение улучшенного текста
-
-    alt Ошибка API
-        API-->>Main: HTTP 4xx/5xx или timeout
-        Main-->>IPC: throw Error
-        IPC-->>Renderer: Promise.reject(error)
-        Renderer->>Renderer: showResult('❌ Ошибка: ' + error.message)
-        Renderer-->>U: Отображение сообщения об ошибке
+    alt Ошибка
+        A-->>M: Ошибка
+        M-->>R: throw Error
+        R-->>U: Показ ошибки
     end
 ```
 
